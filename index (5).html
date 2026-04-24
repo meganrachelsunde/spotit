@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>spot it ♡ find it, save it, love it</title>
+<meta name="description" content="Saw something cute? Save it. Find it. Build your little collection." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #ffc2d4;
+    --pink-soft: #ffe0ea;
+    --pink-deep: #ff8fb1;
+    --cherry: #e94560;
+    --butter: #fff4c2;
+    --butter-soft: #fff9dc;
+    --mint: #c8e6c8;
+    --lilac: #e4d0ff;
+    --ivory: #fffaf5;
+    --cream: #fef6ec;
+    --ink: #3d2438;
+    --ink-soft: #6b4a63;
+    --shadow: rgba(180, 100, 140, 0.18);
+    /* gold accents */
+    --gold: #c9a24a;
+    --gold-light: #e8c980;
+    --gold-soft: #f5e4b8;
+    --gold-deep: #a8842e;
+    --gold-shadow: rgba(168, 132, 46, 0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background:
+      radial-gradient(circle at 15% 5%, var(--pink-soft) 0%, transparent 50%),
+      radial-gradient(circle at 90% 20%, var(--butter-soft) 0%, transparent 45%),
+      radial-gradient(circle at 50% 95%, var(--lilac) 0%, transparent 60%),
+      var(--ivory);
+    padding: 20px 16px 80px;
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before, body::after {
+    display: none;
+  }
+
+  .floating-decor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+    animation: float 6s ease-in-out infinite;
+  }
+  .floating-decor.bow { color: var(--pink-deep); font-size: 26px; }
+  .floating-decor.heart { color: var(--cherry); font-size: 22px; }
+  .floating-decor.sparkle { color: var(--gold); font-size: 22px; }
+  .floating-decor.cherry { font-size: 22px; }
+  .floating-decor.star { color: var(--gold); font-size: 20px; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(10deg); }
+  }
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-20px) rotate(8deg); }
+  }
+
+  .wrap { max-width: 520px; margin: 0 auto; position: relative; }
+
+  header { text-align: center; padding: 28px 0 20px; }
+  .brand-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: white;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1.5px solid var(--gold-light);
+    box-shadow: 0 4px 12px var(--shadow);
+    margin-bottom: 20px;
+  }
+  .brand-tag::before { content: '♡'; color: var(--cherry); }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(58px, 16vw, 96px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    text-shadow: 2px 2px 0 var(--gold-light), 4px 4px 0 var(--pink);
+    display: inline-block;
+  }
+  h1 em { font-style: italic; font-weight: 600; color: var(--cherry); }
+  h1 .heart {
+    display: inline-block;
+    color: var(--cherry);
+    font-style: normal;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    margin-left: 8px;
+    font-size: 0.7em;
+    vertical-align: middle;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  .tagline {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 360px;
+    margin: 14px auto 0;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin: 24px 0 20px;
+    padding: 6px;
+    background: white;
+    border-radius: 100px;
+    box-shadow: 0 4px 16px var(--shadow);
+  }
+  .tab {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .tab.active {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 60%, var(--gold-light) 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 143, 177, 0.4);
+  }
+  .tab .count {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 1px 8px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .tab:not(.active) .count { background: var(--pink-soft); color: var(--ink); }
+
+  .card {
+    background: white;
+    border-radius: 28px;
+    padding: 26px 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px var(--shadow);
+    position: relative;
+  }
+  .card-label {
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--cherry) 100%);
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 5px 16px;
+    border-radius: 100px;
+    box-shadow: 0 4px 12px var(--gold-shadow);
+  }
+  .card-label::before { content: '🎀 '; }
+
+  .drop-zone {
+    border: 2.5px dashed var(--pink-deep);
+    border-radius: 20px;
+    padding: 36px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: linear-gradient(135deg, var(--pink-soft) 0%, var(--butter-soft) 100%);
+    overflow: hidden;
+  }
+  .drop-zone:hover {
+    border-color: var(--cherry);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow);
+  }
+  .drop-zone.dragover {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--butter) 100%);
+    border-color: var(--cherry);
+    transform: scale(1.02);
+  }
+  .drop-zone.has-image {
+    padding: 0;
+    border-style: solid;
+    border-color: var(--pink);
+    border-width: 3px;
+  }
+  .drop-zone.has-image img { width: 100%; display: block; border-radius: 17px; }
+
+  .drop-icon {
+    font-size: 48px;
+    margin-bottom: 8px;
+    display: inline-block;
+    animation: wobble 3s ease-in-out infinite;
+  }
+  @keyframes wobble {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+  .drop-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .drop-hint { font-size: 12px; color: var(--ink-soft); font-weight: 500; }
+
+  .or {
+    display: flex;
+    align-items: center;
+    margin: 18px 0;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .or::before, .or::after {
+    content: '';
+    flex: 1;
+    height: 1.5px;
+  }
+  .or::before { background: linear-gradient(90deg, transparent, transparent, var(--pink)); }
+  .or::after { background: linear-gradient(90deg, var(--pink), transparent, transparent); }
+
+  textarea {
+    width: 100%;
+    border: 2px solid var(--pink);
+    background: var(--pink-soft);
+    padding: 14px 16px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    border-radius: 16px;
+    resize: vertical;
+    min-height: 70px;
+    outline: none;
+    transition: all 0.2s;
+  }
+  textarea:focus {
+    border-color: var(--cherry);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.1);
+  }
+  textarea::placeholder { color: var(--ink-soft); opacity: 0.7; }
+
+  .btn-main {
+    width: 100%;
+    margin-top: 16px;
+    background: linear-gradient(135deg, var(--cherry) 0%, var(--pink-deep) 50%, var(--gold-light) 100%);
+    color: white;
+    border: none;
+    padding: 18px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: all 0.2s ease;
+    box-shadow: 0 6px 20px rgba(233, 69, 96, 0.35);
+  }
+  .btn-main:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(233, 69, 96, 0.45);
+  }
+  .btn-main:active:not(:disabled) { transform: translateY(0); }
+  .btn-main:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: var(--ink-soft);
+    box-shadow: none;
+  }
+  .btn-main::after { content: ' ♡'; }
+
+  .status {
+    margin-top: 18px;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, var(--lilac) 0%, var(--pink-soft) 100%);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 16px;
+    display: none;
+  }
+  .status.visible { display: block; animation: pop 0.3s ease; }
+  .status .dots::after {
+    content: '...';
+    animation: dots 1.4s infinite;
+  }
+  @keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .results { margin-top: 20px; }
+  .result-card {
+    background: white;
+    border-radius: 28px;
+    padding: 24px 22px 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 32px var(--shadow);
+    animation: slideIn 0.4s ease backwards;
+  }
+  .result-card:nth-child(1) { animation-delay: 0.05s; }
+  .result-card:nth-child(2) { animation-delay: 0.15s; }
+  .result-card:nth-child(3) { animation-delay: 0.25s; }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .result-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .result-emoji {
+    width: 56px;
+    height: 56px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--pink-soft), var(--butter-soft));
+    border: 2px solid var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+  .result-title-wrap { flex: 1; }
+  .result-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .aesthetic-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cherry);
+    font-weight: 700;
+    padding: 3px 10px;
+    background: var(--pink-soft);
+    border: 1px solid var(--gold-light);
+    border-radius: 100px;
+  }
+
+  .detail-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .chip {
+    background: var(--butter-soft);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    border: 1.5px solid var(--gold-light);
+  }
+  .chip .emoji { margin-right: 4px; }
+
+  .search-box {
+    background: linear-gradient(135deg, var(--pink-soft) 0%, var(--butter-soft) 100%);
+    padding: 14px 16px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+  }
+  .search-box .label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .search-box .label::before { content: '🎀 '; }
+  .search-box .content {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .brands-box {
+    background: var(--lilac);
+    padding: 14px 16px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+  }
+  .brands-box .label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .brands-box .label::before { content: '♡ '; }
+  .brand-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .brand-pill {
+    background: white;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid var(--gold-light);
+    color: var(--ink);
+  }
+
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .shop-btn {
+    background: white;
+    border: 2px solid var(--pink);
+    padding: 11px 12px;
+    text-decoration: none;
+    color: var(--ink);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 100px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .shop-btn:hover {
+    background: var(--pink);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+
+  .save-btn {
+    width: 100%;
+    background: transparent;
+    border: 2px dashed var(--pink-deep);
+    padding: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cherry);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .save-btn:hover {
+    background: var(--pink-soft);
+    border-style: solid;
+  }
+  .save-btn.saved {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: white;
+    border-style: solid;
+  }
+
+  .collection-empty {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 8px 32px var(--shadow);
+  }
+  .collection-empty .big-emoji {
+    font-size: 64px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .collection-empty h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .collection-empty p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .collection-item {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px var(--shadow);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .collection-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px var(--shadow);
+  }
+  .collection-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+  }
+  .collection-item .info { padding: 12px 14px; }
+  .collection-item .info h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .collection-item .info .vibe {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--cherry);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .collection-item .remove-x {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px var(--shadow);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .collection-item:hover .remove-x { opacity: 1; }
+  .collection-item .remove-x:hover { background: var(--cherry); color: white; }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(61, 36, 56, 0.4);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+    overflow-y: auto;
+  }
+  .modal-overlay.visible { display: flex; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal {
+    background: white;
+    border-radius: 28px;
+    max-width: 480px;
+    width: 100%;
+    padding: 24px;
+    margin: auto 0;
+    position: relative;
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--pink-soft);
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .error {
+    background: var(--pink-soft);
+    border: 2px solid var(--cherry);
+    color: var(--cherry);
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 16px;
+    border-radius: 16px;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 24px 20px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  footer .line {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    margin-top: 6px;
+    color: var(--gold-deep);
+  }
+
+  input[type="file"] { display: none; }
+
+  .reset-btn {
+    display: block;
+    margin: 8px auto 0;
+    background: none;
+    border: none;
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 100px;
+  }
+  .reset-btn:hover { background: var(--pink-soft); color: var(--cherry); }
+
+  .hidden { display: none !important; }
+
+  @keyframes float-up {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-60px) scale(1.5); opacity: 0; }
+  }
+  .heart-float {
+    position: absolute;
+    color: var(--cherry);
+    font-size: 24px;
+    pointer-events: none;
+    animation: float-up 0.8s ease-out forwards;
+  }
+</style>
+</head>
+<body>
+
+<!-- floating coquette decoration -->
+<div class="floating-decor bow" style="top: 8%; left: 6%; animation-delay: 0s;">🎀</div>
+<div class="floating-decor heart" style="top: 22%; right: 5%; animation-delay: 1.5s;">♡</div>
+<div class="floating-decor sparkle" style="top: 42%; left: 4%; animation: float-slow 7s ease-in-out infinite; animation-delay: 0.5s;">✦</div>
+<div class="floating-decor cherry" style="top: 55%; right: 7%; animation-delay: 2.5s;">🍒</div>
+<div class="floating-decor bow" style="top: 72%; left: 7%; font-size: 20px; animation-delay: 3s;">🎀</div>
+<div class="floating-decor star" style="top: 88%; right: 8%; animation-delay: 1s;">★</div>
+<div class="floating-decor heart" style="top: 35%; right: 15%; font-size: 16px; opacity: 0.25; animation-delay: 4s;">♡</div>
+<div class="floating-decor sparkle" style="top: 65%; left: 15%; font-size: 16px; opacity: 0.25; animation-delay: 2s;">✧</div>
+
+<div class="wrap">
+
+  <header>
+    <h1>spot <em>it</em><span class="heart">♡</span></h1>
+    <p class="tagline">saw something cute? let's find it.</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="find">
+      <span>🎀</span> find
+    </button>
+    <button class="tab" data-tab="collection">
+      <span>♡</span> my collection <span class="count" id="collectionCount">0</span>
+    </button>
+  </nav>
+
+  <section id="findTab">
+    <div class="card">
+      <div class="card-label">step one</div>
+
+      <div id="dropZone" class="drop-zone">
+        <div class="drop-icon">📸</div>
+        <div class="drop-title">drop a pic or tap to upload</div>
+        <div class="drop-hint">screenshots, tiktok saves, pinterest — whatever</div>
+        <input type="file" id="fileInput" accept="image/*" />
+      </div>
+      <button id="resetBtn" class="reset-btn hidden">✕ change photo</button>
+
+      <div class="or">or 🎀 type it out</div>
+
+      <textarea
+        id="textInput"
+        placeholder="that green cardigan with the pearl buttons from that one reel..."
+      ></textarea>
+
+      <button id="findBtn" class="btn-main" disabled>find it</button>
+
+      <div id="status" class="status"></div>
+      <div id="error" class="error hidden"></div>
+    </div>
+
+    <div id="results" class="results"></div>
+  </section>
+
+  <section id="collectionTab" class="hidden">
+    <div id="collectionEmpty" class="collection-empty">
+      <span class="big-emoji">🎀</span>
+      <h2>your collection is empty</h2>
+      <p>spot something cute and hit save to build your little archive ♡</p>
+    </div>
+    <div id="collectionGrid" class="collection-grid hidden"></div>
+  </section>
+
+  <footer>
+    <div class="line">made with ♡</div>
+  </footer>
+
+</div>
+
+<div id="modal" class="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+  let currentImageBase64 = null;
+  let currentImageMediaType = null;
+  let currentImageDataUrl = null;
+  let lastResults = [];
+  let collection = [];
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const textInput = document.getElementById('textInput');
+  const findBtn = document.getElementById('findBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const status = document.getElementById('status');
+  const errorBox = document.getElementById('error');
+  const results = document.getElementById('results');
+  const tabs = document.querySelectorAll('.tab');
+  const findTab = document.getElementById('findTab');
+  const collectionTab = document.getElementById('collectionTab');
+  const collectionGrid = document.getElementById('collectionGrid');
+  const collectionEmpty = document.getElementById('collectionEmpty');
+  const collectionCount = document.getElementById('collectionCount');
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modalContent');
+  const modalClose = document.getElementById('modalClose');
+
+  function saveCollection() { updateCollectionUI(); }
+
+  function updateCollectionUI() {
+    collectionCount.textContent = collection.length;
+    if (collection.length === 0) {
+      collectionEmpty.classList.remove('hidden');
+      collectionGrid.classList.add('hidden');
+    } else {
+      collectionEmpty.classList.add('hidden');
+      collectionGrid.classList.remove('hidden');
+      renderCollection();
+    }
+  }
+
+  function renderCollection() {
+    collectionGrid.innerHTML = '';
+    collection.forEach((item, i) => {
+      const card = document.createElement('div');
+      card.className = 'collection-item';
+      card.innerHTML = `
+        ${item.image
+          ? `<img src="${item.image}" alt="${escapeHtml(item.name)}" />`
+          : `<div style="aspect-ratio:1;background:linear-gradient(135deg,var(--pink-soft),var(--butter-soft));display:flex;align-items:center;justify-content:center;font-size:40px;">${item.emoji || '♡'}</div>`
+        }
+        <div class="info">
+          <h4>${escapeHtml(item.name)}</h4>
+          <div class="vibe">${escapeHtml(item.aesthetic || '')}</div>
+        </div>
+        <button class="remove-x" data-idx="${i}" title="remove">✕</button>
+      `;
+      card.addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-x')) {
+          e.stopPropagation();
+          collection.splice(i, 1);
+          saveCollection();
+          return;
+        }
+        openModal(item);
+      });
+      collectionGrid.appendChild(card);
+    });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const which = tab.getAttribute('data-tab');
+      if (which === 'find') {
+        findTab.classList.remove('hidden');
+        collectionTab.classList.add('hidden');
+      } else {
+        findTab.classList.add('hidden');
+        collectionTab.classList.remove('hidden');
+      }
+    });
+  });
+
+  function updateBtn() {
+    findBtn.disabled = !currentImageBase64 && !textInput.value.trim();
+  }
+  textInput.addEventListener('input', updateBtn);
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('dragover');
+  });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) handleFile(file);
+  });
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) handleFile(file);
+  });
+  resetBtn.addEventListener('click', resetDropZone);
+
+  function handleFile(file) {
+    if (!file.type.startsWith('image/')) {
+      showError("that's not a pic, silly ♡ try a jpg, png, or screenshot");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target.result;
+      currentImageDataUrl = dataUrl;
+      currentImageBase64 = dataUrl.split(',')[1];
+      currentImageMediaType = file.type;
+      dropZone.classList.add('has-image');
+      dropZone.innerHTML = `<img src="${dataUrl}" alt="your pic" />`;
+      resetBtn.classList.remove('hidden');
+      updateBtn();
+      hideError();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function resetDropZone() {
+    currentImageBase64 = null;
+    currentImageMediaType = null;
+    currentImageDataUrl = null;
+    dropZone.classList.remove('has-image');
+    dropZone.innerHTML = `
+      <div class="drop-icon">📸</div>
+      <div class="drop-title">drop a pic or tap to upload</div>
+      <div class="drop-hint">screenshots, tiktok saves, pinterest — whatever</div>
+    `;
+    resetBtn.classList.add('hidden');
+    fileInput.value = '';
+    updateBtn();
+  }
+
+  function showStatus(msg) {
+    status.innerHTML = `🎀 ${msg}<span class="dots"></span>`;
+    status.classList.add('visible');
+  }
+  function hideStatus() { status.classList.remove('visible'); }
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.remove('hidden');
+  }
+  function hideError() { errorBox.classList.add('hidden'); }
+
+  findBtn.addEventListener('click', async () => {
+    hideError();
+    results.innerHTML = '';
+    findBtn.disabled = true;
+    showStatus("looking at your pic");
+
+    const userText = textInput.value.trim();
+    const prompt = buildPrompt(userText);
+
+    try {
+      const messages = [{
+        role: 'user',
+        content: currentImageBase64
+          ? [
+              { type: 'image', source: { type: 'base64', media_type: currentImageMediaType, data: currentImageBase64 } },
+              { type: 'text', text: prompt },
+            ]
+          : prompt
+      }];
+
+      showStatus("reading the vibe");
+
+      const response = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          messages,
+        }),
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error('API ' + response.status + ': ' + errText);
+      }
+
+      const data = await response.json();
+      showStatus("finding where to shop");
+
+      const text = data.content.filter(b => b.type === 'text').map(b => b.text).join('\n');
+      const parsed = parseResponse(text);
+      if (!parsed || parsed.length === 0) {
+        throw new Error("hmm, couldn't read it ♡ try a clearer pic or type what you saw");
+      }
+
+      lastResults = parsed;
+      hideStatus();
+      renderResults(parsed);
+    } catch (err) {
+      console.error(err);
+      hideStatus();
+      showError(err.message || 'something broke — try again ♡');
+    } finally {
+      findBtn.disabled = false;
+      updateBtn();
+    }
+  });
+
+  function buildPrompt(userText) {
+    const textPart = userText ? `\nShe also described it: "${userText}"` : '';
+    return `You are a sweet, stylish big sister helping a 13-year-old girl find a piece of clothing she saw somewhere. She ${currentImageBase64 ? 'uploaded a photo' : 'described it'}.${textPart}
+
+Your job: identify the main garment/item(s). Max 3 items, usually 1 unless multiple pieces clearly stand out. Pick a fun emoji for each that represents it.
+
+Respond with ONLY valid JSON, no preamble, no code fences, no explanation. Format:
+
+[
+  {
+    "emoji": "one emoji (e.g. 👗 dress, 🎀 bow-y item, 🧸 teddy-like, 👚 top, 👖 jeans, 🧥 jacket, 👟 shoes — pick the most fitting)",
+    "name": "short sweet name (3-6 words)",
+    "aesthetic": "one vibe, lowercase, 1-2 words (coquette, y2k, strawberry girl, clean girl, preppy, downtown, balletcore, cottagecore, mob wife, old money)",
+    "details": {
+      "type": "garment type",
+      "color": "colors",
+      "fabric": "fabric/material guess",
+      "fit": "fit/silhouette",
+      "extras": "cute details (bows, pearls, lace, ruffles)"
+    },
+    "search_query": "4-8 words she'd type to find it",
+    "brand_guesses": ["brand1", "brand2", "brand3"]
+  }
+]
+
+Rules:
+- Warm and specific, not clinical.
+- Brands from: Princess Polly, Aritzia, Garage, Brandy Melville, Urban Outfitters, Edikted, Cider, Free People, Aerie, Hollister, PacSun, Sandy Liang, Lululemon, Shein, Pretty Little Thing. Pick 2-3 that match the vibe.
+- Return ONLY the JSON array.`;
+  }
+
+  function parseResponse(text) {
+    let cleaned = text.trim().replace(/^```json\s*/i, '').replace(/^```\s*/, '').replace(/\s*```$/, '');
+    const start = cleaned.indexOf('[');
+    const end = cleaned.lastIndexOf(']');
+    if (start === -1 || end === -1) return null;
+    cleaned = cleaned.slice(start, end + 1);
+    try { return JSON.parse(cleaned); }
+    catch (e) { console.error('parse', e); return null; }
+  }
+
+  function renderResults(items) {
+    results.innerHTML = '';
+    items.forEach((item, i) => {
+      const card = document.createElement('div');
+      card.className = 'result-card';
+      const q = encodeURIComponent(item.search_query || item.name);
+      const d = item.details || {};
+      const chips = [
+        d.color && `<span class="chip"><span class="emoji">🎨</span>${escapeHtml(d.color)}</span>`,
+        d.fabric && `<span class="chip"><span class="emoji">🧶</span>${escapeHtml(d.fabric)}</span>`,
+        d.fit && `<span class="chip"><span class="emoji">👗</span>${escapeHtml(d.fit)}</span>`,
+        d.extras && `<span class="chip"><span class="emoji">✦</span>${escapeHtml(d.extras)}</span>`,
+      ].filter(Boolean).join('');
+
+      card.innerHTML = `
+        <div class="result-header">
+          <div class="result-emoji">${item.emoji || '♡'}</div>
+          <div class="result-title-wrap">
+            <h3>${escapeHtml(item.name || 'mystery piece')}</h3>
+            <div class="aesthetic-tag">${escapeHtml(item.aesthetic || 'tbd')}</div>
+          </div>
+        </div>
+        ${chips ? `<div class="detail-chips">${chips}</div>` : ''}
+        <div class="search-box">
+          <span class="label">search for</span>
+          <div class="content">${escapeHtml(item.search_query || '—')}</div>
+        </div>
+        ${item.brand_guesses && item.brand_guesses.length ? `
+          <div class="brands-box">
+            <span class="label">probably from</span>
+            <div class="brand-pills">
+              ${item.brand_guesses.map(b => `<span class="brand-pill">${escapeHtml(b)}</span>`).join('')}
+            </div>
+          </div>
+        ` : ''}
+        <div class="shop-grid">
+          <a class="shop-btn" href="https://www.google.com/search?tbm=shop&q=${q}" target="_blank" rel="noopener">🛍 google</a>
+          <a class="shop-btn" href="https://www.pinterest.com/search/pins/?q=${q}" target="_blank" rel="noopener">📌 pinterest</a>
+          <a class="shop-btn" href="https://www.depop.com/search/?q=${q}" target="_blank" rel="noopener">🏷 depop</a>
+          <a class="shop-btn" href="https://poshmark.com/search?query=${q}" target="_blank" rel="noopener">💗 poshmark</a>
+        </div>
+        <button class="save-btn" data-idx="${i}">
+          <span>♡</span> save to my collection
+        </button>
+      `;
+      results.appendChild(card);
+    });
+
+    results.querySelectorAll('.save-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.getAttribute('data-idx'), 10);
+        const item = { ...lastResults[idx], image: currentImageDataUrl };
+        collection.unshift(item);
+        saveCollection();
+        btn.classList.add('saved');
+        btn.innerHTML = '<span>♥</span> saved!';
+        const rect = btn.getBoundingClientRect();
+        const sprinkles = ['♡', '🎀', '✦', '♡', '🎀'];
+        for (let j = 0; j < 5; j++) {
+          const sprinkle = document.createElement('div');
+          sprinkle.className = 'heart-float';
+          sprinkle.textContent = sprinkles[j];
+          sprinkle.style.left = (rect.left + rect.width/2 + (Math.random()-0.5)*60) + 'px';
+          sprinkle.style.top = (rect.top + window.scrollY) + 'px';
+          sprinkle.style.animationDelay = (j * 0.08) + 's';
+          document.body.appendChild(sprinkle);
+          setTimeout(() => sprinkle.remove(), 1000);
+        }
+        setTimeout(() => {
+          btn.classList.remove('saved');
+          btn.innerHTML = '<span>♡</span> save to my collection';
+        }, 2000);
+      });
+    });
+
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function openModal(item) {
+    const q = encodeURIComponent(item.search_query || item.name);
+    const d = item.details || {};
+    const chips = [
+      d.color && `<span class="chip"><span class="emoji">🎨</span>${escapeHtml(d.color)}</span>`,
+      d.fabric && `<span class="chip"><span class="emoji">🧶</span>${escapeHtml(d.fabric)}</span>`,
+      d.fit && `<span class="chip"><span class="emoji">👗</span>${escapeHtml(d.fit)}</span>`,
+      d.extras && `<span class="chip"><span class="emoji">✦</span>${escapeHtml(d.extras)}</span>`,
+    ].filter(Boolean).join('');
+
+    modalContent.innerHTML = `
+      ${item.image ? `<img src="${item.image}" style="width:100%;border-radius:20px;margin-bottom:16px;" />` : ''}
+      <div class="result-header">
+        <div class="result-emoji">${item.emoji || '♡'}</div>
+        <div class="result-title-wrap">
+          <h3 style="font-family:'Fraunces',serif;font-weight:700;font-size:22px;margin-bottom:6px;">${escapeHtml(item.name)}</h3>
+          <div class="aesthetic-tag">${escapeHtml(item.aesthetic || 'tbd')}</div>
+        </div>
+      </div>
+      ${chips ? `<div class="detail-chips">${chips}</div>` : ''}
+      <div class="search-box">
+        <span class="label">search for</span>
+        <div class="content">${escapeHtml(item.search_query || '—')}</div>
+      </div>
+      ${item.brand_guesses?.length ? `
+        <div class="brands-box">
+          <span class="label">probably from</span>
+          <div class="brand-pills">
+            ${item.brand_guesses.map(b => `<span class="brand-pill">${escapeHtml(b)}</span>`).join('')}
+          </div>
+        </div>
+      ` : ''}
+      <div class="shop-grid">
+        <a class="shop-btn" href="https://www.google.com/search?tbm=shop&q=${q}" target="_blank" rel="noopener">🛍 google</a>
+        <a class="shop-btn" href="https://www.pinterest.com/search/pins/?q=${q}" target="_blank" rel="noopener">📌 pinterest</a>
+        <a class="shop-btn" href="https://www.depop.com/search/?q=${q}" target="_blank" rel="noopener">🏷 depop</a>
+        <a class="shop-btn" href="https://poshmark.com/search?query=${q}" target="_blank" rel="noopener">💗 poshmark</a>
+      </div>
+    `;
+    modal.classList.add('visible');
+  }
+  modalClose.addEventListener('click', () => modal.classList.remove('visible'));
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('visible');
+  });
+
+  function escapeHtml(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  }
+
+  updateCollectionUI();
+</script>
+</body>
+</html>
