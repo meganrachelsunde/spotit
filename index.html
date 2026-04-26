@@ -994,7 +994,7 @@
     const textPart = userText ? `\nShe also described it: "${userText}"` : '';
     return `You are a sweet, stylish big sister helping a 13-year-old girl find a piece of clothing she saw somewhere. She ${currentImageBase64 ? 'uploaded a photo' : 'described it'}.${textPart}
 
-Your job: identify the main garment/item(s). Max 3 items, usually 1 unless multiple pieces clearly stand out. Pick a fun emoji for each that represents it.
+Your job: Your job: identify the key items/pieces in the photo. This may include clothing (tops, bottoms, dresses, jackets), shoes, bags, and statement accessories (jewelry sets, hair accessories, sunglasses). Return 1 card per distinct piece. Aim for 2-5 cards total — enough to capture the outfit, but skip minor details (single rings, basic earrings, plain socks). If the photo shows just one item, return one. If it's a full outfit collage, return cards for each major piece. Pick a fun, fitting emoji for each.
 
 Respond with ONLY valid JSON, no preamble, no code fences, no explanation. Format:
 
