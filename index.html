@@ -1014,10 +1014,14 @@ Respond with ONLY valid JSON, no preamble, no code fences, no explanation. Forma
     "brand_guesses": ["brand1", "brand2", "brand3"]
   }
 ]
-
 Rules:
 - Warm and specific, not clinical.
-- Brands from: Princess Polly, Aritzia, Garage, Brandy Melville, Urban Outfitters, Edikted, Cider, Free People, Aerie, Hollister, PacSun, Sandy Liang, Lululemon, Shein, Pretty Little Thing. Pick 2-3 that match the vibe.
+
+BRAND IDENTIFICATION:
+- If a brand name, logo, or wordmark is CLEARLY VISIBLE in the photo (e.g., "POLO," "Nike," "Adidas," visible swoosh, visible logo, visible wordmark), name that brand as the FIRST brand_guess and add "(logo visible)" after it. Example: "Ralph Lauren Polo (logo visible)".
+- After naming a visible brand, add 1-2 similar-vibe alternatives in case she wants dupes or can't afford the original.
+- If a brand IS visible, INCLUDE the brand name in the search_query (e.g. "ralph lauren pink polo floral tee" not just "pink polo floral tee").
+- If NO brand is visible, suggest 2-3 brands from this pool that match the aesthetic: Princess Polly, Aritzia, Garage, Brandy Melville, Urban Outfitters, Edikted, Cider, Free People, Aerie, Hollister, PacSun, Sandy Liang, Lululemon, Shein, Pretty Little Thing, Adidas, Nike, Madewell, Reformation, Levi's, Abercrombie, Ralph Lauren, Tommy Hilfiger, Calvin Klein, Lacoste.
 - Return ONLY the JSON array.`;
   }
 
