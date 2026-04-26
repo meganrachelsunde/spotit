@@ -920,9 +920,67 @@
     updateBtn();
   }
 
-  function showStatus(msg) {
-    status.innerHTML = `🎀 ${msg}<span class="dots"></span>`;
-    status.classList.add('visible');
+  function let statusInterval = null;
+
+const statusMessages = {
+  starting: [
+    "okay let me see what we're working with",
+    "ooh, lemme look",
+    "pulling up the magnifying glass",
+    "studying the vibe",
+  ],
+  vision: [
+    "reading the outfit",
+    "noting the colors",
+    "checking for logos and labels",
+    "counting the pieces",
+    "is that... gold hardware?",
+    "decoding the aesthetic",
+    "this is cute btw",
+    "okay i see what you saw",
+  ],
+  thinking: [
+    "matching the energy",
+    "running through brands in my head",
+    "trying to remember where i've seen this",
+    "scanning my mental rolodex",
+    "thinking thinking thinking",
+    "this is giving me ideas",
+  ],
+  shopping: [
+    "lining up where to shop",
+    "finding you the dupes too",
+    "checking depop, of course",
+    "almost there bestie",
+    "wrapping it with a bow",
+  ],
+};
+
+function showStatus(phase) {
+  const messages = statusMessages[phase] || statusMessages.starting;
+  let idx = 0;
+
+  // Show first message immediately
+  status.innerHTML = `🎀 ${messages[idx]}<span class="dots"></span>`;
+  status.classList.add('visible');
+
+  // Clear any previous interval
+  if (statusInterval) clearInterval(statusInterval);
+
+  // Rotate every 2.5 seconds
+  statusInterval = setInterval(() => {
+    idx = (idx + 1) % messages.length;
+    status.innerHTML = `🎀 ${messages[idx]}<span class="dots"></span>`;
+  }, 2500);
+}
+
+function hideStatus() {
+  if (statusInterval) {
+    clearInterval(statusInterval);
+    statusInterval = null;
+  }
+  status.classList.remove('visible');
+}
   }
   function hideStatus() { status.classList.remove('visible'); }
   function showError(msg) {
