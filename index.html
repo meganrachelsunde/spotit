@@ -920,7 +920,7 @@
     updateBtn();
   }
 
-  function let statusInterval = null;
+  let statusInterval = null;
 
 const statusMessages = {
   starting: [
@@ -981,8 +981,6 @@ function hideStatus() {
   }
   status.classList.remove('visible');
 }
-  }
-  function hideStatus() { status.classList.remove('visible'); }
   function showError(msg) {
     errorBox.textContent = msg;
     errorBox.classList.remove('hidden');
@@ -1128,12 +1126,7 @@ BRAND IDENTIFICATION:
             </div>
           </div>
         ` : ''}
-        <div class="shop-grid">
-          <a class="shop-btn" href="https://www.google.com/search?tbm=shop&q=${q}" target="_blank" rel="noopener">🛍 google</a>
-          <a class="shop-btn" href="https://www.pinterest.com/search/pins/?q=${q}" target="_blank" rel="noopener">📌 pinterest</a>
-          <a class="shop-btn" href="https://www.depop.com/search/?q=${q}" target="_blank" rel="noopener">🏷 depop</a>
-          <a class="shop-btn" href="https://poshmark.com/search?query=${q}" target="_blank" rel="noopener">💗 poshmark</a>
-        </div>
+        ${shopButtons(q)}
         <button class="save-btn" data-idx="${i}">
           <span>♡</span> save to my collection
         </button>
@@ -1203,12 +1196,7 @@ BRAND IDENTIFICATION:
           </div>
         </div>
       ` : ''}
-      <div class="shop-grid">
-        <a class="shop-btn" href="https://www.google.com/search?tbm=shop&q=${q}" target="_blank" rel="noopener">🛍 google</a>
-        <a class="shop-btn" href="https://www.pinterest.com/search/pins/?q=${q}" target="_blank" rel="noopener">📌 pinterest</a>
-        <a class="shop-btn" href="https://www.depop.com/search/?q=${q}" target="_blank" rel="noopener">🏷 depop</a>
-        <a class="shop-btn" href="https://poshmark.com/search?query=${q}" target="_blank" rel="noopener">💗 poshmark</a>
-      </div>
+      ${shopButtons(q)}
     `;
     modal.classList.add('visible');
   }
@@ -1220,6 +1208,27 @@ BRAND IDENTIFICATION:
   function escapeHtml(str) {
     if (typeof str !== 'string') return '';
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  }
+
+  // Single source of truth for shop destinations.
+  // Add, remove, or reorder retailers here and both the result card
+  // and the saved-item modal pick up the change automatically.
+  // Skimlinks rewrites these outbound clicks server-side once the
+  // publisher script is loaded in <head>; no per-retailer affiliate
+  // tagging needed in this list.
+  const SHOP_DESTINATIONS = [
+    { label: '🛍 google',    url: q => `https://www.google.com/search?tbm=shop&q=${q}` },
+    { label: '📌 pinterest', url: q => `https://www.pinterest.com/search/pins/?q=${q}` },
+    { label: '🏷 depop',     url: q => `https://www.depop.com/search/?q=${q}` },
+    { label: '💗 poshmark',  url: q => `https://poshmark.com/search?query=${q}` },
+  ];
+
+  function shopButtons(q) {
+    return `<div class="shop-grid">${
+      SHOP_DESTINATIONS.map(d =>
+        `<a class="shop-btn" href="${d.url(q)}" target="_blank" rel="noopener">${d.label}</a>`
+      ).join('')
+    }</div>`;
   }
 
   updateCollectionUI();
